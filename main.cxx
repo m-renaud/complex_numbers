@@ -17,7 +17,6 @@ int main()
 
   if(result)
   {
-    std::cout << "Parse Successful" << std::endl;
     generate_xml(cv, std::cout, std::cerr);
   }
   else
