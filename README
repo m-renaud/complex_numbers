@@ -1,0 +1,9 @@
+Development branch of complex numbers parser and generator.
+
+This branch will most of the time not actually compile :)
+For a working version, visit the master branch.
+
+ChangeLog:
+
+11/08/31 - First made this branch
+	 - Going to switch from using mrr::complex to std::complex
