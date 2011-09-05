@@ -16,7 +16,7 @@ namespace ka = boost::spirit::karma;
 
 //===========================================================================
 template <typename Iter>
-  struct complex_generator : ka::grammar<Iter, std::vector<complex>() >
+struct complex_generator : ka::grammar<Iter, std::vector<complex>() >
 {
   complex_generator() : complex_generator::base_type(start_state)
   {
@@ -46,7 +46,7 @@ template <typename Iter>
 
 //===========================================================================
 template <typename Iter>
-  inline bool generate_complex_xml(Iter& sink, std::vector<complex>& v)
+inline bool generate_complex_xml(Iter& sink, std::vector<complex>& v)
 {
   complex_generator<Iter> g;
   return ka::generate(sink, g, v);

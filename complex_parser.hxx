@@ -18,7 +18,7 @@ namespace qi = boost::spirit::qi;
 
 //===========================================================================
 template <typename Iter>
-  struct complex_parser : qi::grammar<Iter, std::vector<complex>() >
+struct complex_parser : qi::grammar<Iter, std::vector<complex>() >
 {
   complex_parser() : complex_parser::base_type(start_state)
   {
@@ -57,7 +57,7 @@ template <typename Iter>
 
 //===========================================================================
 template <typename Iter>
-  bool parse_complex(Iter& first, Iter& last, std::vector<complex>& v)
+bool parse_complex(Iter& first, Iter& last, std::vector<complex>& v)
 {
   complex_parser<Iter> p;
   return qi::parse(first, last, p, v);
