@@ -13,23 +13,23 @@ namespace mrr {
 
 //---------------------------------------------------------------------------
 
-  bool parse_from_stream(std::istream& is, std::vector<complex>& cv)
-  {
-    // Save old flags...
-    std::ios::fmtflags old = is.flags();
-    is.unsetf(std::ios::skipws);
+bool parse_from_stream(std::istream& is, std::vector<complex>& cv)
+{
+  // Save old flags...
+  std::ios::fmtflags old = is.flags();
+  is.unsetf(std::ios::skipws);
 
-    // Parse...
-    using boost::spirit::basic_istream_iterator;
-    basic_istream_iterator<char> begin(is);
-    basic_istream_iterator<char> end;
-    bool const retval = parse_complex(begin, end, cv);
+  // Parse...
+  using boost::spirit::basic_istream_iterator;
+  basic_istream_iterator<char> begin(is);
+  basic_istream_iterator<char> end;
+  bool const retval = parse_complex(begin, end, cv);
 
-    // Reset the flags...
-    is.flags(old);
+  // Reset the flags...
+  is.flags(old);
 
-    return retval;
-  }
+  return retval;
+}
 
 //===========================================================================
 

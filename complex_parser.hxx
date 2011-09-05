@@ -14,54 +14,54 @@ namespace mrr {
 
 //---------------------------------------------------------------------------
 
-  namespace qi = boost::spirit::qi;
+namespace qi = boost::spirit::qi;
 
-  //===========================================================================
-  template <typename Iter>
+//===========================================================================
+template <typename Iter>
   struct complex_parser : qi::grammar<Iter, std::vector<complex>() >
+{
+  complex_parser() : complex_parser::base_type(start_state)
   {
-    complex_parser() : complex_parser::base_type(start_state)
-    {
-      using qi::double_;
-      using qi::space;
-      using qi::lexeme;
-      using qi::omit;
-      using qi::lit;
-      using qi::eol;
-      using qi::eoi;
-      using boost::spirit::repository::flush_multi_pass;
+    using qi::double_;
+    using qi::space;
+    using qi::lexeme;
+    using qi::omit;
+    using qi::lit;
+    using qi::eol;
+    using qi::eoi;
+    using boost::spirit::repository::flush_multi_pass;
 
 
-      end_of_complex %=
-        (
-	  eol
-	  | lit(',')
-	  | space
-	  | eoi
-        )
-        >> flush_multi_pass
-      ;
+    end_of_complex %=
+    (
+      +eol >> -end_of_complex
+      | +lit(',') >> -end_of_complex
+      | +space >> -end_of_complex
+      | eoi
+    )
+    >> flush_multi_pass
+    ;
 
-      complex_number %= lexeme['(' >> double_ >> ',' > double_ >> ')'];
+    complex_number %= lexeme['(' >> double_ >> ',' > double_ >> ')']
 //        | lexeme[double_ << ]
-//      ;
+    ;
 
-      start_state %= complex_number % end_of_complex;
-    }
-
-    qi::rule<Iter, complex()> complex_number;
-    qi::rule<Iter, std::string()> end_of_complex;
-    qi::rule<Iter, std::vector<complex>()> start_state;
-
-  };
-
-  //===========================================================================
-  template <typename Iter>
-  bool parse_complex(Iter& first, Iter& last, std::vector<complex>& v)
-  {
-    complex_parser<Iter> p;
-    return qi::parse(first, last, p, v);
+    start_state %= complex_number % end_of_complex;
   }
+
+  qi::rule<Iter, complex()> complex_number;
+  qi::rule<Iter, std::string()> end_of_complex;
+  qi::rule<Iter, std::vector<complex>()> start_state;
+
+};
+
+//===========================================================================
+template <typename Iter>
+  bool parse_complex(Iter& first, Iter& last, std::vector<complex>& v)
+{
+  complex_parser<Iter> p;
+  return qi::parse(first, last, p, v);
+}
 
 //===========================================================================
 

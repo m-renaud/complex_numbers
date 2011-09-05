@@ -13,11 +13,11 @@ namespace mrr {
 
 //---------------------------------------------------------------------------
 
-  bool parse_from_stream(std::istream& is, std::vector<complex>& cv);
+bool parse_from_stream(std::istream& is, std::vector<complex>& cv);
 
-  bool generate_xml(std::vector<complex>& v,
-		    std::ostream& out,
-		    std::ostream& err);
+bool generate_xml(std::vector<complex>& v,
+		  std::ostream& out,
+		  std::ostream& err);
 
 //===========================================================================
 

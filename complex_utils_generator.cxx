@@ -12,13 +12,13 @@ namespace mrr {
 
 //---------------------------------------------------------------------------
 
-  bool generate_xml(std::vector<complex>& v,
-		    std::ostream& out,
-		    std::ostream& err)
-  {
-    std::ostream_iterator<char> begin(out);
-    return generate_complex_xml(begin, v);
-  }
+bool generate_xml(std::vector<complex>& v,
+		  std::ostream& out,
+		  std::ostream& err)
+{
+  std::ostream_iterator<char> begin(out);
+  return generate_complex_xml(begin, v);
+}
 
 
 //===========================================================================
